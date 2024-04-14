@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大屏看板分析DEMO</title>
+    <script src="node_modules/echarts/dist/echarts.js"></script>
+    <link rel="stylesheet" href="CSS/contain.css">
+</head>
+<body>
+<div id="contain">
+    <div id="data1" style="width: 100%;height:300px;"></div>
+    <div id="data2" style="width: 100%;height:300px;"></div>
+    <div id="data3" style="width: 100%;height:300px;"></div>
+    <div id="data4" style="width: 100%;height:300px;"></div>
+</div>
+<script type="text/javascript">
+    const chart1 = echarts.init(document.getElementById('data1'));
+    const chart2 = echarts.init(document.getElementById('data2'));
+    const chart3 = echarts.init(document.getElementById('data3'));
+    const chart4 = echarts.init(document.getElementById('data4'));
+    const option1 = {
+        title: {
+            text: "CDP客服人数",
+        },
+        legend: {},
+        tooltip: {},
+        dataset: {
+            source: [
+                ['product', '第一季度', '第二季度', '第三季度', '第四季度'],
+                ['天津', 66, 62, 65, 70],
+                ['北京', 50, 45, 42, 40],
+                ['廊坊', 40, 45, 38, 40],
+                ['上海', 30, 30, 28, 25],
+                ['杭州', 20, 18, 20, 20],
+                ['重庆', 15, 18, 20, 20],
+                ['大连', 20, 21, 20, 20],
+                ['哈尔滨', 25, 24, 20, 20]
+            ]
+        },
+        xAxis: [
+            {
+                type: 'category',
+                name: '办公地点'
+            },
+        ],
+        yAxis: [
+            {
+                name: 'CDP客服人数/单位(人)'
+            }
+        ],
+        grid: [{bottom: '15%'}, {top: '25%'}],
+        series: [
+            {
+                type: 'bar',
+                emphasis: {
+                    focus: 'series'
+                },
+                barGap: 0
+            },
+            {
+                type: 'bar',
+                emphasis: {
+                    focus: 'series'
+                },
+                barGap: 0
+            },
+            {
+                type: 'bar',
+                emphasis: {
+                    focus: 'series'
+                },
+                barGap: 0
+            },
+            {
+                type: 'bar',
+                emphasis: {
+                    focus: 'series'
+                },
+                barGap: 0
+            },
+        ]
+    };
+    chart1.setOption(option1);
+    const option2 = {
+        title: {
+            text: "KFS员工人数"
+        },
+        legend: {},
+        tooltip: {},
+        dataset: {
+            source: [
+                ['product', '第一季度', '第二季度', '第三季度', '第四季度'],
+                ['天津', 2200, 2100, 2200, 2300],
+                ['北京', 1000, 900, 850, 800],
+                ['廊坊', 3000, 3500, 3500, 3600],
+                ['上海', 1000, 1000, 1000, 900],
+                ['杭州', 500, 500, 500, 500],
+                ['重庆', 2500, 2600, 2600, 2600],
+                ['大连', 2000, 2000, 2000, 2000],
+                ['哈尔滨', 1000, 1000, 1000, 1000]
+            ]
+        },
+        xAxis: [
+            {
+                type: 'category',
+                name: '办公地点'
+            },
+        ],
+        yAxis: {
+            name: 'KSF员工人数/单位(人)'
+        },
+        grid: [{bottom: '15%'}, {top: '15%'}],
+        series: [
+            {
+                type: 'line',
+                emphasis: {
+                    focus: 'series'
+                },
+            },
+            {
+                type: 'line',
+                emphasis: {
+                    focus: 'series'
+                },
+            },
+            {
+                type: 'line',
+                emphasis: {
+                    focus: 'series'
+                },
+            },
+            {
+                type: 'line',
+                emphasis: {
+                    focus: 'series'
+                },
+            }
+        ]
+    };
+    chart2.setOption(option2);
+    const city = [
+        '天津', '北京', '廊坊', '上海', '杭州', '重庆', '大连',
+        '哈尔滨'
+    ];
+    // prettier-ignore
+    const season = [
+        '第一季度', '第二季度', '第三季度',
+        '第四季度'
+    ];
+    // prettier-ignore
+    const data = [[0, 0, 6000], [0, 1, 200], [0, 2, 2300], [0, 3, 700], [0, 4, 600], [0, 5, 1800], [0, 6, 1200], [0, 7, 800], [1, 0, 2100],[1,1,900],[1, 2, 3500], [1, 3, 1000], [1, 4, 500], [1, 5, 2600], [1, 6, 2000], [1, 7, 1000], [2, 0, 6000], [2, 1, 800], [2, 2, 3000], [2, 3, 700], [2, 4, 600], [2, 5, 1800], [2, 6, 1500], [2, 7, 1200],[3, 0, 8200], [3, 1, 980], [3, 2, 2500], [3, 3, 800], [3, 4, 700], [3, 5, 2500], [3, 6, 2000], [3, 7, 1100]]
+        .map(function (item) {
+            return [item[1], item[0], item[2] || '-'];
+        });
+    const option3 = {
+        title: {
+            text: '工单数量'
+        },
+        tooltip: {
+            position: 'top'
+        },
+        grid: {
+            height: '50%',
+            top: '10%'
+        },
+        xAxis: {
+            type: 'category',
+            data: city,
+            splitArea: {
+                show: true
+            },
+            name: '办公地点'
+        },
+        yAxis: {
+            type: 'category',
+            data: season,
+            splitArea: {
+                show: true
+            }
+        },
+        visualMap: {
+            min: 0,
+            max: 10000,
+            calculable: true,
+            orient: 'horizontal',
+            left: 'center',
+            bottom: '15%'
+        },
+        series: [
+            {
+                type: 'heatmap',
+                data: data,
+                label: {
+                    show: true
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    chart3.setOption(option3);
+    const option4 = {
+        title: {
+            text: "SLA"
+        },
+        legend: {},
+        tooltip: {},
+        dataset: {
+            source: [
+                ['product', '第一季度', '第二季度', '第三季度', '第四季度'],
+                ['天津', 0.995, 0.997, 0.992, 0.995],
+                ['北京', 0.990, 0.980, 0.999, 0.992],
+                ['廊坊', 0.980, 0.996, 0.985, 0.995],
+                ['上海', 0.996, 0.999, 0.996, 0.997],
+                ['杭州', 0.999, 0.990, 0.999,0.9995],
+                ['重庆', 0.990, 0.990, 0.990, 0.9975],
+                ['大连', 0.990, 0.990, 0.990, 0.990],
+                ['哈尔滨', 0.990, 0.980, 0.995, 0.995]
+            ]
+        },
+        xAxis: [
+            {
+                type: 'category',
+                name: '办公地点'
+            }
+        ],
+        yAxis: {
+            name: 'SLA'
+        },
+        grid: [{bottom: '15%'}, {top: '15%'}],
+        series: [
+            {type: 'scatter'},
+            {type: 'scatter'},
+            {type: 'scatter'},
+            {type: 'scatter'}
+        ]
+    };
+    chart4.setOption(option4);
+</script>
+</body>
+</html>
